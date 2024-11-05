@@ -68,6 +68,10 @@ func setupHandlers(bot *telebot.Bot, apiKey string) {
 
 func handleTextMessage(c telebot.Context, apiKey string) error {
     repliedMessage := c.Message().ReplyTo
+    if repliedMessage == nil {
+        return nil
+    }
+
     requestBody := createRequestBody(repliedMessage.Text)
     responseBody, err := sendRequest(requestBody, apiKey)
     if err != nil {
