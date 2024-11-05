@@ -8,7 +8,7 @@ This project is a Telegram bot that acts as an English teacher, providing senten
 - Corrects sentences and provides a revised version.
 - Lists corrected errors in bullet points.
 - Explains corrections in English.
-- 
+  
 ## Requirements
 
 - Go (1.16 or later)
