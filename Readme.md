@@ -16,7 +16,7 @@ This project is a Telegram bot that interacts with users, processes messages, an
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/alirezadp10/projectname.git
+   git clone https://github.com/alirezadp10/english-editor-bot.git
    cd projectname
    ```
 
