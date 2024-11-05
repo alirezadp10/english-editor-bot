@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    image: english-editor-bot:latest
+    ports:
+      - "${APP_PORT:-8080}:80"  # Use environment variable APP_PORT or default to 8080
+    environment:
+      - HTTPS_PROXY=socks5h://172.30.64.1:2080
+      - HTTP_PROXY=socks5h://172.30.64.1:2080
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}             # Database name
+      POSTGRES_USER: ${POSTGRES_USER}         # Database user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # Database password
+    ports:
+      - "${POSTGRES_PORT}:5432"          # Use environment variable POSTGRES_PORT or default to 5432
+    volumes:
+      - pg_data:/var/lib/postgresql/data      # Persist data
+
+volumes:
+  pg_data:
