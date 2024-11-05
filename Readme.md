@@ -21,7 +21,7 @@ This project is a Telegram bot that acts as an English teacher, providing senten
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/english-teacher-bot.git
+   git clone https://github.com/alirezadp10/english-teacher-bot.git
    cd english-teacher-bot
    ```
 
