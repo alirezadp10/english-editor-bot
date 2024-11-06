@@ -10,6 +10,33 @@ import (
 )
 
 func main() {
+    // Set up a new Kafka producer
+    //config := sarama.NewConfig()
+    //config.Producer.RequiredAcks = sarama.WaitForAll
+    //config.Producer.Retry.Max = 5
+    //config.Producer.Return.Successes = true
+    ////
+    //producer, err := sarama.NewSyncProducer([]string{"kafka:9092"}, config)
+    //if err != nil {
+    //    panic(err)
+    //}
+    //defer producer.Close()
+    //
+    //// Create a message
+    //msg := &sarama.ProducerMessage{
+    //    Topic: "messages",
+    //    Value: sarama.StringEncoder(`{"user_id":123,"content":"Hello, world!","timestamp":"2024-11-05T12:34:56Z"}`),
+    //}
+    //
+    //// Send message
+    //partition, offset, err := producer.SendMessage(msg)
+    //if err != nil {
+    //    panic(err)
+    //}
+    //fmt.Printf("Message sent to partition %d with offset %d\n", partition, offset)
+
+    //fmt.Printf("Message sent to partition with offset\n")
+
     // Load environment variables
     config.LoadEnv()
 

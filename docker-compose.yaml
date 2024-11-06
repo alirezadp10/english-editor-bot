@@ -5,22 +5,66 @@ services:
     build: .
     image: english-editor-bot:latest
     ports:
-      - "${APP_PORT:-8080}:80"  # Use environment variable APP_PORT or default to 8080
+      - "${APP_PORT:-8080}:80"
     environment:
       - HTTPS_PROXY=socks5h://172.30.64.1:2080
       - HTTP_PROXY=socks5h://172.30.64.1:2080
+    networks:
+      - english-editor-bot
 
   postgres:
     image: postgres:latest
     restart: always
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}             # Database name
-      POSTGRES_USER: ${POSTGRES_USER}         # Database user
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} # Database password
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
-      - "${POSTGRES_PORT}:5432"          # Use environment variable POSTGRES_PORT or default to 5432
+      - "${POSTGRES_PORT}:5432"
     volumes:
-      - pg_data:/var/lib/postgresql/data      # Persist data
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - english-editor-bot
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - english-editor-bot
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+    networks:
+      - english-editor-bot
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - english-editor-bot
 
 volumes:
   pg_data:
+  mongo_data:
+
+networks:
+  english-editor-bot:
