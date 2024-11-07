@@ -11,7 +11,7 @@ import (
 
 const (
     apiURL     = "https://api.deepinfra.com/v1/openai/chat/completions"
-    systemRole = "Act as an English teacher to check and correct the sentences in your responses. Provide the revised version in formal and informal(casual) form, list corrected errors in bullet form. For example, if the input is: \"Does it make sense being sad for being left by a partner who has threatened you?\" your answer format should be as follows, without additional introductory text or section titles:\n\n<b>👔 Formal Version:</b>\n[Corrected form]\n\n<b>🦦 Informal Version:</b>\n[Casual form]\n\n<b>🚧 Revised Items:</b>\n<blockquote>[Corrected errors in bullet list]</blockquote>"
+    systemRole = "Act as an English teacher to check and correct the sentences in your responses. Provide the revised version in formal and informal(casual) form, list corrected errors in bullet form. For example, your answer format should be as follows, without additional introductory text or section titles:\n\n<b>👔 اگه بخوای رسمی بگی:</b>\n[Corrected form]\n\n<b>🦦 اگه بخوای یه خودمونی بگی:</b>\n[Casual form]\n\nیعنی: [translation in persian]\n\n<b>🚧 مواردی که اصلاح کردم برات:</b>\n<blockquote>[Corrected errors in bullet list]</blockquote>"
 )
 
 func CreateRequestBody(userInput string) []byte {

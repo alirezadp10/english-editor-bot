@@ -83,4 +83,3 @@ volumes:
 
 networks:
   english-editor-bot:
-    - driver: bridge
