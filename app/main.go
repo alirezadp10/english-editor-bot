@@ -36,9 +36,6 @@ func main() {
 
     //fmt.Printf("Message sent to partition with offset\n")
 
-    // Load environment variables
-    //config.LoadEnv()
-
     // Connect to the database
     db, err := database.ConnectDB()
     if err != nil {

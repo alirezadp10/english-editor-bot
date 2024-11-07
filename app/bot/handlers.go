@@ -37,19 +37,19 @@ func handleTextMessage(c telebot.Context, db *gorm.DB, apiKey string) error {
         if err != nil {
             return fmt.Errorf("failed to save replied message: %v", err)
         }
-    }
 
-    message, err := database.SaveMessage(db, c.Message(), user, chat, repliedMessage)
-    if err != nil {
-        return fmt.Errorf("failed to save message: %v", err)
-    }
+        message, err := database.SaveMessage(db, c.Message(), user, chat, repliedMessage)
+        if err != nil {
+            return fmt.Errorf("failed to save message: %v", err)
+        }
 
-    if err := database.SaveEntities(db, c.Message().Entities, message.MessageID); err != nil {
-        return fmt.Errorf("failed to save entities: %v", err)
+        if err := database.SaveEntities(db, c.Message().Entities, message.MessageID); err != nil {
+            return fmt.Errorf("failed to save entities: %v", err)
+        }
     }
 
     if repliedMessage == nil {
-        return nil
+        return c.Reply("باید رو مسیجی که می‌خوای تصحیح شه ریپلای کنی", telebot.ModeHTML)
     }
 
     // Request creation and API call

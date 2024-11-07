@@ -1,9 +1,17 @@
 version: '3.9'
 
 services:
+#  hugging_face:
+#    build: llm
+#    image: english-editor-bot-llm:latest
+#    ports:
+#      - "5000:5000"
+#    networks:
+#      - english-editor-bot
+
   app:
     build: ./app
-    image: english-editor-bot:latest
+    image: english-editor-bot-app:latest
     ports:
       - "${APP_PORT:-8080}:80"
     environment:
