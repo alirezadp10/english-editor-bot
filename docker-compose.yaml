@@ -1,9 +1,9 @@
 version: '3.9'
 
 services:
-#  hugging_face:
-#    build: llm
-#    image: english-editor-bot-llm:latest
+#  ai:
+#    build: ./ai
+#    image: english-editor-bot-ai:latest
 #    ports:
 #      - "5000:5000"
 #    networks:
@@ -83,3 +83,4 @@ volumes:
 
 networks:
   english-editor-bot:
+    - driver: bridge
