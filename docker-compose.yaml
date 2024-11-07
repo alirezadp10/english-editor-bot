@@ -2,13 +2,20 @@ version: '3.9'
 
 services:
   app:
-    build: .
+    build: ./app
     image: english-editor-bot:latest
     ports:
       - "${APP_PORT:-8080}:80"
     environment:
-      - HTTPS_PROXY=socks5h://172.30.64.1:2080
-      - HTTP_PROXY=socks5h://172.30.64.1:2080
+      - HTTPS_PROXY=${HTTPS_PROXY}
+      - HTTP_PROXY=${HTTP_PROXY}
+      - APP_PORT=${APP_PORT}
+      - BOT_TOKEN=${BOT_TOKEN}
+      - API_KEY=${API_KEY}
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_PORT=${POSTGRES_PORT}
     networks:
       - english-editor-bot
 

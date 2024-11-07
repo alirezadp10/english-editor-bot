@@ -2,7 +2,6 @@ package main
 
 import (
     "english-editor-bot/bot"
-    "english-editor-bot/config"
     "english-editor-bot/database"
     "fmt"
     "log"
@@ -38,7 +37,7 @@ func main() {
     //fmt.Printf("Message sent to partition with offset\n")
 
     // Load environment variables
-    config.LoadEnv()
+    //config.LoadEnv()
 
     // Connect to the database
     db, err := database.ConnectDB()
