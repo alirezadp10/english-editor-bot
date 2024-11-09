@@ -1,5 +1,5 @@
 
-# Project Name
+# English Editor bot
 
 This project is a Telegram bot that interacts with users, processes messages, and performs various database operations to save message details and user information. The bot also communicates with an external API to enhance its functionalities.
 
