@@ -10,11 +10,10 @@ import (
 )
 
 const (
-    apiURL     = "https://api.deepinfra.com/v1/openai/chat/completions"
-    systemRole = "Act as an English teacher to check and correct the sentences in your responses. Provide the revised version in formal and informal(casual) form, list corrected errors in bullet form. For example, your answer format should be as follows, without additional introductory text or section titles:\n\n<b>👔 اگه بخوای رسمی بگی:</b>\n[Corrected form]\n\n<b>🦦 اگه بخوای یه خودمونی بگی:</b>\n[Casual form]\n\nیعنی: [translation in persian]\n\n<b>🚧 مواردی که اصلاح کردم برات:</b>\n<blockquote>[Corrected errors in bullet list]</blockquote>"
+    apiURL = "https://api.deepinfra.com/v1/openai/chat/completions"
 )
 
-func CreateRequestBody(userInput string) []byte {
+func CreateRequestBody(userInput, systemRole string) []byte {
     requestBody := map[string]interface{}{
         "model": "meta-llama/Meta-Llama-3.1-70B-Instruct",
         "messages": []map[string]string{
