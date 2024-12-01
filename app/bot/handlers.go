@@ -23,10 +23,6 @@ func SetupHandlers(bot *telebot.Bot, db *gorm.DB, apiKey string) {
     bot.Handle("/en", func(c telebot.Context) error {
         return translateToEnglish(c, db, apiKey)
     })
-
-    bot.Handle("/fa", func(c telebot.Context) error {
-        return translateToFarsi(c, db, apiKey)
-    })
 }
 
 func checkGrammarIssues(c telebot.Context, db *gorm.DB, apiKey string) error {
@@ -107,29 +103,6 @@ func translateToEnglish(c telebot.Context, db *gorm.DB, apiKey string) error {
 
     // Request creation and API call
     systemRole := "Act as an English teacher and just translate the text that is provided in english. Your answer format should be as follows, without additional introductory text or section titles:\n\n👩🏻‍🏫[PUT THE TRANSLATED VERSION IN ENGLISH FORM HERE]\n"
-    requestBody := api.CreateRequestBody(c.Message().ReplyTo.Text, systemRole)
-    responseBody, err := api.SendRequest(requestBody, apiKey)
-    if err != nil {
-        return err
-    }
-
-    // Parse and reply
-    content, err := api.ParseResponse(responseBody)
-    if err != nil {
-        return err
-    }
-    return c.Reply(content, telebot.ModeHTML)
-}
-
-func translateToFarsi(c telebot.Context, db *gorm.DB, apiKey string) error {
-    go jobs.SaveMessage(c, db)
-
-    if c.Message().ReplyTo == nil {
-        return c.Reply("You must reply to the message you want to convert.", telebot.ModeHTML)
-    }
-
-    // Request creation and API call
-    systemRole := "Act as an English teacher and just translate the text that is provided in Farsi(persian). Your answer format should be as follows, without additional introductory text or section titles:\n\n👩🏻‍🏫[PUT THE TRNASLATED VERSION IN PERSIAN FORM HERE]"
     requestBody := api.CreateRequestBody(c.Message().ReplyTo.Text, systemRole)
     responseBody, err := api.SendRequest(requestBody, apiKey)
     if err != nil {
