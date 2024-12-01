@@ -37,7 +37,7 @@ func checkGrammarIssues(c telebot.Context, db *gorm.DB, apiKey string) error {
     }
 
     // Request creation and API call
-    systemRole := "Act as an English teacher to check and correct the sentences in your responses. Provide the revised version in formal and informal(casual) form, list corrected errors in bullet form. For example, your answer format should be as follows, without additional introductory text or section titles:\n\n<b>👔 فکر کنم شکل درستش اینه:</b>\n[Corrected form]\n\n<b>🦦 یا میتونی بگی:</b>\n[Casual form]\n\nیعنی [translation in persian]\n\n<b>🚧 توضیحات: </b>\n<blockquote>[Corrected errors in bullet list]</blockquote>"
+    systemRole := "Act as an English teacher just revise the sentenceses. Provide the revised version in formal and informal(casual) form, list corrected errors in bullet form. Your answer format should be as follows, without additional introductory text or section titles:\n\n👔[PUT THE FORMAL FORM HERE]\n\n🦦<i>[PUT THE CASUAL FORM HERE]</i>\n\n<blockquote>[PUT THE CORRECTED ERRORS HERE IN BULLET FORM]</blockquote>"
     requestBody := api.CreateRequestBody(c.Message().ReplyTo.Text, systemRole)
     responseBody, err := api.SendRequest(requestBody, apiKey)
     if err != nil {

@@ -1,5 +1,13 @@
 FROM hub.hamdocker.ir/golang:1.23.2 AS builder
 WORKDIR /app
+
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+        telnet \
+        curl \
+        vim && \
+    rm -rf /var/lib/apt/lists/*
+
 COPY go.mod .
 COPY go.sum .
 RUN go mod download
