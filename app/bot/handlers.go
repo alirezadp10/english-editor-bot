@@ -33,7 +33,7 @@ func checkGrammarIssues(c telebot.Context, db *gorm.DB, apiKey string) error {
     }
 
     // Request creation and API call
-    systemRole := "Act as an English teacher just revise the sentences. Provide the revised version in formal and informal(casual) form, list corrected errors in bullet form. Your answer format should be as follows, without additional introductory text or section titles:\n\n👔[PUT THE FORMAL FORM HERE]\n\n🦦<i>[PUT THE CASUAL FORM HERE]</i>\n\n<blockquote>[PUT THE CORRECTED ERRORS HERE IN BULLET FORM]</blockquote>"
+    systemRole := "Act as an English teacher just revise the sentences. Your answer format should be as follows, without additional introductory text or section titles:\n\n👔[PUT THE FORMAL FORM HERE]\n\n🦦<i>[PUT THE CASUAL FORM HERE]</i>"
     requestBody := api.CreateRequestBody(c.Message().ReplyTo.Text, systemRole)
     responseBody, err := api.SendRequest(requestBody, apiKey)
     if err != nil {
@@ -56,7 +56,7 @@ func convertToFormal(c telebot.Context, db *gorm.DB, apiKey string) error {
     }
 
     // Request creation and API call
-    systemRole := "Act as an English teacher just revise the sentences. Provide the revised version in formal form, list corrected errors in bullet form. Your answer format should be as follows, without additional introductory text or section titles:\n\n👔[PUT THE FORMAL FORM HERE]\n\n<blockquote>[PUT THE CORRECTED ERRORS HERE IN BULLET FORM]</blockquote>"
+    systemRole := "Act as an English teacher just revise the sentences. Provide the revised version in formal form. Your answer format should be as follows, without additional introductory text or section titles:\n\n👔[PUT THE FORMAL FORM HERE]"
     requestBody := api.CreateRequestBody(c.Message().ReplyTo.Text, systemRole)
     responseBody, err := api.SendRequest(requestBody, apiKey)
     if err != nil {
@@ -79,7 +79,7 @@ func convertToInformal(c telebot.Context, db *gorm.DB, apiKey string) error {
     }
 
     // Request creation and API call
-    systemRole := "Act as an English teacher just revise the sentences. Provide the revised version in informal(casual) form, list corrected errors in bullet form. Your answer format should be as follows, without additional introductory text or section titles:\n\n🦦<i>[PUT THE CASUAL FORM HERE]</i>\n\n<blockquote>[PUT THE CORRECTED ERRORS HERE IN BULLET FORM]</blockquote>"
+    systemRole := "Act as an English teacher just revise the sentences. Provide the revised version in informal(casual) form. Your answer format should be as follows, without additional introductory text or section titles:\n\n🦦<i>[PUT THE CASUAL FORM HERE]</i>"
     requestBody := api.CreateRequestBody(c.Message().ReplyTo.Text, systemRole)
     responseBody, err := api.SendRequest(requestBody, apiKey)
     if err != nil {
