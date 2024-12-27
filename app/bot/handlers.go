@@ -33,7 +33,7 @@ func checkGrammarIssues(c telebot.Context, db *gorm.DB, apiKey string) error {
     }
 
     // Request creation and API call
-    systemRole := "Act as an English teacher just revise the sentences. Your answer format should be as follows, without additional introductory text or section titles:\n\n👔[PUT THE FORMAL FORM HERE]\n\n🦦<i>[PUT THE CASUAL FORM HERE]</i>"
+    systemRole := "You are a grammar assistant. When the user provides an English sentence, review it and list only the necessary corrections in the following format:\n\n❌ <i>Incorrect part</i> → ✅ <b>Correct part</b>\n\nAt the end, write the corrected sentence on a new line with this format:  \n✨ <b>Corrected Sentence:</b> <code>Corrected Sentence</code>\n\nDo not provide explanations or additional comments.\n"
     requestBody := api.CreateRequestBody(c.Message().ReplyTo.Text, systemRole)
     responseBody, err := api.SendRequest(requestBody, apiKey)
     if err != nil {

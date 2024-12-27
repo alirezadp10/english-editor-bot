@@ -15,7 +15,7 @@ func main() {
         log.Fatalf("Database connection error: %v", err)
     }
 
-    _ = database.AutoMigrate(db)
+    //_ = database.AutoMigrate(db)
 
     // Initialize bot and start handlers
     botToken := os.Getenv("BOT_TOKEN")
